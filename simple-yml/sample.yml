@@ -1,0 +1,8 @@
+apiVersion: v1                    # kubelet contact to apiserver inside master.# kubeapi has multiple versions (initial version was version v1)  
+kind: Pod                         # kind key is used for resource type
+metadata:                         # label or tag related to pod is given using metadata( information about data is called metadata)
+  name: sample-pod                
+spec:                             # a pod has many specification in this case (we are launching container) 
+  containers:                     # Since we can launch multiple container inside a pod we use " - " as list of container(with container name and image name) 
+    - name: test-webserver
+      image: ashishizofficial/apache-php
