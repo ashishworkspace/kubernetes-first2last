@@ -1,0 +1,10 @@
+apiversion: v1          
+kind: Service           # Using Service we create Load Balancer
+metadata:               
+ name: myservice-lb
+spec:
+  selector:             # providing selector because when a pad launch it will have dynamic ip. Using Selector we k8S can trigger Pod.
+    app: web
+  ports:
+    targetPort: 80      # exposing pod at port no 80 (Backend-Server)
+    - port: 8080        # front-end port for Load balancer
