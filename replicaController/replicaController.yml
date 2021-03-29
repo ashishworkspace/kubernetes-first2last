@@ -3,6 +3,7 @@ kind: ReplicationController               # this is one of the resource type cal
 metadata:                                 # we can provide information about replication controller using metadata  
   name: mynewreplicacontrroller            
 spec:                                     # we also need to provide the specification abot replication Controller
+  replicas: 5                              # to create multiple relica we use relica inside spec
   selector:                               # selector will trigger the pod using label
     app: webserver                        # in this case app = weserver
   template:                               # we need to provide template by which our pod can be launched with desired specification
