@@ -1,14 +1,14 @@
-apiVersion: v1
-kind: ReplicationController
-metadata:
-  name: mynewreplicacontrroller
-spec:
-  selector:
-    app: webserver
-  template: 
+apiVersion: v1                            # Since replication controller belong to initial phase of kubernetes i.e. the reason why it is Version v1
+kind: ReplicationController               # this is one of the resource type called replication controller i.e. pod can be mannaged using labels
+metadata:                                 # we can provide information about replication controller using metadata  
+  name: mynewreplicacontrroller            
+spec:                                     # we also need to provide the specification abot replication Controller
+  selector:                               # selector will trigger the pod using label
+    app: webserver                        # in this case app = weserver
+  template:                               # we need to provide template by which our pod can be launched with desired specification
     metadata:
       name: my-pod
-      labels: 
+      labels:                             # in order to have tag accociated with pod we need to mention label inside the metadata
         app: webserver
     spec:
       containers: 
