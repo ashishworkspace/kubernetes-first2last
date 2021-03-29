@@ -6,11 +6,11 @@ spec:
   selector:
     app: webserver
   template: 
-  metadata:
-    name: my-pod
-    label: 
-      app: webserver
-  spec:
-    container: 
-    - name: my-weberver-container
-      image: ashishizofficial/apache-php
+    metadata:
+      name: my-pod
+      labels: 
+        app: webserver
+    spec:
+      containers: 
+      - name: my-weberver-container
+        image: ashishizofficial/apache-php
