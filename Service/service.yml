@@ -1,4 +1,4 @@
-apiversion: v1          
+apiVersion: v1          
 kind: Service           # Using Service we create Load Balancer
 metadata:               
  name: myservice-lb
@@ -6,5 +6,17 @@ spec:
   selector:             # providing selector because when a pad launch it will have dynamic ip. Using Selector we k8S can trigger Pod.
     app: web
   ports:
-    targetPort: 80      # exposing pod at port no 80 (Backend-Server)
-    - port: 8080        # front-end port for Load balancer
+    - targetPort: 80      # exposing pod at port no 80 (Backend-Server)
+      port: 8080        # front-end port for Load balancer
+
+
+# Create Service using command Line
+# {{ kubectl expose {{ resource_type }} {{ name_of_resource_type }}  --port={{ port_number }} --type={{ Load balancer type }}
+# eg:- {{ kubectl expose rc new-rc --port=80 --type=NodePort }}
+
+# now if someone wants to Connect website or app they need to type ip address of front-end with the port number
+# but loadbalancer need to trigger the pod i.e. they use selector 
+
+# all we need is to run pod with the label = Service selector name
+# this will automatically grep all the pod with label match with selector and do  Load Balancing
+
