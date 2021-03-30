@@ -5,12 +5,12 @@ metadata:                                 # we can provide information about rep
 spec:                                     # we also need to provide the specification abot replication Controller
   replicas: 5                              # to create multiple relica we use relica inside spec
   selector:                               # selector will trigger the pod using label
-    app: webserver                        # in this case app = weserver
+    app: web                              # in this case app = weserver
   template:                               # we need to provide template by which our pod can be launched with desired specification
     metadata:
       name: my-pod
       labels:                             # in order to have tag accociated with pod we need to mention label inside the metadata
-        app: webserver
+        app: web
     spec:
       containers: 
       - name: my-weberver-container
