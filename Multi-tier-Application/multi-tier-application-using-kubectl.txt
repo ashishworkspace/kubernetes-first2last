@@ -1,0 +1,70 @@
+C:\Users\Ashish Kumar>kubectl run mywordpress --image=wordpress
+pod/mywordpress created
+
+C:\Users\Ashish Kumar>kubectl get pods
+NAME          READY   STATUS              RESTARTS   AGE
+mywordpress   0/1     ContainerCreating   0          10s
+
+C:\Users\Ashish Kumar>kubectl run mysql-pod --image=mysql
+pod/mysql-pod created
+
+C:\Users\Ashish Kumar>kubectl get pods
+NAME          READY   STATUS    RESTARTS   AGE
+mysql-pod     0/1     Error     0          18s
+mywordpress   1/1     Running   0          55s
+
+C:\Users\Ashish Kumar>kubectl logs mysql-pod
+2021-03-30 07:45:03+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 8.0.23-1debian10 started.
+2021-03-30 07:45:03+00:00 [Note] [Entrypoint]: Switching to dedicated user 'mysql'
+2021-03-30 07:45:03+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 8.0.23-1debian10 started.
+2021-03-30 07:45:04+00:00 [ERROR] [Entrypoint]: Database is uninitialized and password option is not specified
+    You need to specify one of the following:
+    - MYSQL_ROOT_PASSWORD
+    - MYSQL_ALLOW_EMPTY_PASSWORD
+    - MYSQL_RANDOM_ROOT_PASSWORD
+
+C:\Users\Ashish Kumar>kubectl run mysql-pod --image=mysql --env=MYSQL_DATABASE=mydb --env=MYSQL_ROOT_PASSWORD=redhat --env=MYSQL_USER=ashish --env=MYSQL_PASSWORD=redhat
+Error from server (AlreadyExists): pods "mysql-pod" already exists
+
+C:\Users\Ashish Kumar>kubectl delete pod mysql-pod
+pod "mysql-pod" deleted
+
+C:\Users\Ashish Kumar>kubectl run mysql-pod --image=mysql --env=MYSQL_DATABASE=mydb --env=MYSQL_ROOT_PASSWORD=redhat --env=MYSQL_USER=ashish --env=MYSQL_PASSWORD=redhat
+pod/mysql-pod created
+
+C:\Users\Ashish Kumar>kubectl logs mysql-pod
+Error from server (BadRequest): container "mysql-pod" in pod "mysql-pod" is waiting to start: ContainerCreating
+
+C:\Users\Ashish Kumar>kubectl logs mysql-pod
+2021-03-30 07:47:41+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 8.0.23-1debian10 started.
+2021-03-30 07:47:41+00:00 [Note] [Entrypoint]: Switching to dedicated user 'mysql'
+2021-03-30 07:47:41+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 8.0.23-1debian10 started.
+2021-03-30 07:47:41+00:00 [Note] [Entrypoint]: Initializing database files
+2021-03-30T07:47:41.595984Z 0 [System] [MY-013169] [Server] /usr/sbin/mysqld (mysqld 8.0.23) initializing of server in progress as process 43
+2021-03-30T07:47:41.608777Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2021-03-30T07:47:42.618402Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2021-03-30T07:47:44.912572Z 6 [Warning] [MY-010453] [Server] root@localhost is created with an empty password ! Please consider switching off the --initialize-insecure option.
+2021-03-30 07:47:49+00:00 [Note] [Entrypoint]: Database files initialized
+2021-03-30 07:47:49+00:00 [Note] [Entrypoint]: Starting temporary server
+2021-03-30T07:47:49.751994Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.23) starting as process 88
+2021-03-30T07:47:49.785960Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2021-03-30T07:47:50.244656Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2021-03-30T07:47:50.492125Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: /var/run/mysqld/mysqlx.sock
+2021-03-30T07:47:50.795972Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+2021-03-30T07:47:50.796726Z 0 [System] [MY-013602] [Server] Channel mysql_main configured to support TLS. Encrypted connections are now supported for this channel.
+2021-03-30T07:47:50.799240Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+2021-03-30T07:47:50.842612Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.23'  socket: '/var/run/mysqld/mysqld.sock'  port: 0  MySQL Community Server - GPL.
+2021-03-30 07:47:50+00:00 [Note] [Entrypoint]: Temporary server started.
+
+C:\Users\Ashish Kumar>kubectl get pods
+NAME          READY   STATUS    RESTARTS   AGE
+mysql-pod     1/1     Running   0          23s
+mywordpress   1/1     Running   0          4m8s
+
+C:\Users\Ashish Kumar>kubectl expose pod mywordpress --port=80 --type=NodePort
+service/mywordpress exposed
+
+C:\Users\Ashish Kumar>kubectl get service
+NAME          TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+kubernetes    ClusterIP   10.96.0.1       <none>        443/TCP        5m49s
+mywordpress   NodePort    10.110.250.17   <none>        80:32395/TCP   7s
