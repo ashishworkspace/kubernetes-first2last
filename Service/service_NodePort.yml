@@ -1,0 +1,17 @@
+apiVersion: v1          
+kind: Service           
+metadata:               
+ name: new-myservice-lb
+spec:
+  type: NodePort       # we need to mention the type as NodePort for Outside connectivity. By default the Type is ClusterIp i.e. the pods has no outside world Connectivity
+  selector:             
+    app: web
+  ports:
+    - targetPort: 80    # exposing pod at port no 80 (Backend-Server)
+      port: 8080        # front-end port for Load balancer
+      nodePort: 30000    # finally provide nodePort also a port no.
+
+
+# now client need nodePort port no. for outside workld connectivity.
+
+
