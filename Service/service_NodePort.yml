@@ -12,6 +12,6 @@ spec:
       nodePort: 30000    # finally provide nodePort also a port no.
 
 
-# now client need nodePort port no. for outside workld connectivity.
+# now client need nodePort port no. for outside world connectivity.
 
 
