@@ -1,0 +1,28 @@
+# setting env variable for mysql pod
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: rc-mysql
+spec:
+  selector:
+    app: mysql-pod
+  template:
+    metadata:
+      name: new-pod
+      labels:
+        app: mysql-pod
+    spec:
+      containers:                                 
+      - name: mysql-container 
+        image: mysql
+        env:                            # setting up enviromental variable
+          - name: MYSQL_DATABASE
+            value: mydatabase
+          - name: MYSQL_ROOT_PASSWORD
+            value: redhat
+          - name: MYSQL_USER
+            value: ashish
+          - name: MYSQL_PASSWORD
+            value: redhat
+
+
