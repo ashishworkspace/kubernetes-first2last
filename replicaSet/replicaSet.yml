@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: ReplicaSet 
+metadata:
+  name: my-rc
+spec: 
+  replicas: 2
+  selector:
+    matchExpressions:
+      - {key: developer, operator: In, values: ['python3','java','dart' ]}
+      - {key: job_exp, operator: In, values: ['0','3', '4' ,'5'] }
+      - {key: location, operator: In, values: ['Delhi', 'Bangalore','New_York']}
+  template:
+    metadata: 
+      name: rs-pod
+      labels:
+        developer: 'dart'
+        job_exp: '0'
+        location: 'Bangalore'
+    spec:
+      containers:
+        - name: rc-container
+          image: ashishizofficial/apache-php
+          
