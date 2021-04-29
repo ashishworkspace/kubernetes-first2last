@@ -1,11 +1,11 @@
-apiVersion: apps/v1
+apiVersion: apps/v1         # since it was added in latest Version
 kind: ReplicaSet 
 metadata:
-  name: my-rc
+  name: my-rs
 spec: 
   replicas: 2
   selector:
-    matchExpressions:
+    matchExpressions:         # we use matchExpression in replicaExpression in replica Set and matchLabels in replica Controller
       - {key: developer, operator: In, values: ['python3','java','dart' ]}
       - {key: job_exp, operator: In, values: ['0','3', '4' ,'5'] }
       - {key: location, operator: In, values: ['Delhi', 'Bangalore','New_York']}
@@ -18,6 +18,6 @@ spec:
         location: 'Bangalore'
     spec:
       containers:
-        - name: rc-container
+        - name: rs-container
           image: ashishizofficial/apache-php
           
