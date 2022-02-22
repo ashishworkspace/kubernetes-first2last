@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: storage-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: container-ip
+  template:
+    metadata:
+      labels:
+        app: container-ip
+    spec:
+      volumes:
+        - name: my-storage
+          persistentVolumeClaim:
+            claimName: storage-pvc
+      containers:
+        - name: container-ip
+          image: ashishizofficial/apache-php
+          volumeMounts:
+            - mountPath: /var/www/html
+              name: my-storage
