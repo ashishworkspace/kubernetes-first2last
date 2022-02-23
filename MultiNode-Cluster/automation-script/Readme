@@ -1,0 +1,18 @@
+First run the `kubeadm.sh` in every node 
+
+than
+some extra commend to run on master node
+
+command 1st: `kubeadm config images pull`
+command 2nd: `kubeadm init --pod-network-cidr=<pod-network>`
+              eg:- `kubeadm init --pod-network-cidr=10.10.0.0/16`
+
+              if command fail due to less cpu or memory
+              `kubeadm init --pod-network-cidr=10.10.0.0/16 --ignore-preflight-errors=NumCPU --ignore-preflight-errors=Mem`
+command 3rd: `kubeadm token create --print-join-command`
+              This command will return string to join the master node for the worker node
+              Copy the string and paste the string in worker node
+
+command 4th: To check that worker node is setup successfully or not run
+             `kubectl get nodes --kubeconfig=/etc/kubernetes/admin.conf`
+               
