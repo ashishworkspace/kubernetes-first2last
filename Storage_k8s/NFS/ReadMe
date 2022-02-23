@@ -1,0 +1,10 @@
+edit the file `/etc/exports`
+<directory-path>  *(rw,no_root_squash,insecure) 
+eg: /external_storage
+
+-------
+start the nfs server
+systemctl start nfs-server
+
+
+

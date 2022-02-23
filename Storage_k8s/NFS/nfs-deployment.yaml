@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: my-pv
+spec:
+  storageClassName: ""
+  capacity:
+    storage: 500Mi
+  accessModes:
+  - ReadWriteOnce
+  nfs:
+    server: "172.31.42.201"
+    path: "/external_storage"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-pvc
+spec:
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 500Mi
+  accessModes:
+  - ReadWriteOnce
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-deploy
+spec:
+  replicas: 1
+  selector:
+    matchExpressions:
+    - {key: country, operator: In, values: [India, USA]}
+  template:
+    metadata:
+      labels:
+        country: India
+    spec:
+      volumes:
+      - name: my-new-volume
+        persistentVolumeClaim:
+          claimName: my-pvc
+      containers:
+      - name: ifconfig
+        image: "ashishizofficial/apache-php:latest"
+        volumeMounts:
+          - mountPath: /var/www/html
+            name: my-new-volume
