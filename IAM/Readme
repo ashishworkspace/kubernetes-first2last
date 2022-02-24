@@ -1,0 +1,50 @@
+
+# Watch the video for setting up IAM in kubernetes
+
+# https://drive.google.com/file/d/1iBPL8aQRYW3pC2yaxIvTtH75EqrJ1Qad/view?usp=sharing
+
+
+
+# ssh root@masterip
+# cd /etc/kubernetes/pki/
+# openssl genrsa -out vimal.key 1024
+# openssl req -new -key vimal.key -out vimal.csr -subj "/CN=vimal/O=Tech"
+# openssl x509 -req -in vimal.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out vimal.crt -days 365
+
+
+
+
+
+
+# kubectl config --kubeconfig vimal.kubeconfig  set-cluster kubernetes --server  https://13.127.93.140:6443 --certificate-authority=ca.crt
+
+# kubectl config --kubeconfig vimal.kubeconfig set-credentials vimal  --client-certificate vimal.crt --client-key vimal.key
+
+# kubectl config set-context  vimal@awskubecluster  --user=vimal   --cluster awskubecluster  --kubeconfig vimal.kubeconfig
+
+
+# Or 
+# cp /root/.kube/config  vimal.kubeconfig
+
+# openssl x509 -in apiserver.crt -text
+# rm /etc/kubernetes/pki/apiserver.* 
+# kubeadm init phase certs all --apiserver-advertise-address=0.0.0.0 --apiserver-cert-extra-sans=114.215.201.87 
+# docker rm -f `docker ps -q -f 'name=k8s_kube-apiserver*'` 
+# systemctl restart kubelet
+
+# Edit file
+# Note: you can use d$ or D ( shift - d ) to delete from the cursor position until the end of the line
+
+# cat vimal.crt  | base64 -w0
+# cat vimal.key  | base64 -w0
+
+
+# kubectl create ns tech
+
+# kubectl create role vimal-tech --verb=get,list        --resource=pods --namespace tech
+
+# kubectl -n tech get role vimal-tech -o yaml
+
+# kubectl create rolebinding vimal-tech-rolebinding     --role=vimal-tech -n tech --user=vimal
+
+# kubectl -n tech get rolebinding -o yaml
