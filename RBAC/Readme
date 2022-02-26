@@ -1,0 +1,13 @@
+Create the namespace 
+`kubectl create ns ashish-cluster`
+
+---
+
+Run the role and rolebinding in the namespace ashish-cluster
+`kubectl apply -f role.yaml role-binding.yaml -n ashish-cluster`
+
+---
+We can create role and role binding form command line also
+
+1. `kubectl create role deployment-role  --resource=deployment --verb=create,get,list -n ashish-cluster`
+2. `kubectl create rolebinding deployment-role-binding --role=deployment-role --user=ashish -n ashish-cluster`

@@ -1,0 +1,13 @@
+# Rolebinding for deployment role in namespace ashish-cluster
+kind: RoleBinding
+metadata:
+  name: deployment-role-binding
+  namespace: ashish-cluster
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: deployment-role
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: User
+  name: ashish
