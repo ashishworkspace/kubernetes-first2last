@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+  custom.conf: |
+    Listen 81
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: web-server

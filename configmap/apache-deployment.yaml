@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: apache-deployment
+  name: apache-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apache-deployment
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: apache-deployment
+    spec:
+      volumes:
+      - name: httpd-conf-file
+        configMap: 
+          name: web-server 
+      containers:
+      - image: ashishizofficial/apache-php
+        name: apache-php
+        volumeMounts:
+        - name: httpd-conf-file
+          mountPath: /etc/httpd/conf.d/
+        
+         
