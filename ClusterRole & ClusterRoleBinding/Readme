@@ -1,0 +1,13 @@
+Some of the resources in kubernetes are not managed under namespace.
+So we need to create cluster role and cluster rolebinding
+---
+
+We can check all the resource that can be managed under namespace or not using the command
+`kubectl api-resources`
+
+---
+
+We can also create the role and role binding using command line interface
+
+1. `kubectl create clusterrole storage-role --resource=PersistentVolume --verb=list,get`
+2. `kubectl create clusterrolebinding storage-cluster-role-binding --user=ashish --clusterrole=storage-role`
