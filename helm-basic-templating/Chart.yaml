@@ -1,0 +1,11 @@
+apiVersion: v1
+name: apache-webserver
+version: 0.1
+appVersion: 1
+desciption: "Launching apache default webserver"
+maintainers:
+  - name: Ashish Kumar
+    email: get.mail.ashish@gmail.com
+  
+
+

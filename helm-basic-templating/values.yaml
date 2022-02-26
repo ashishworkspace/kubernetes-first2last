@@ -1,0 +1,4 @@
+replicaCount: 2
+myservices:
+  port: 80
+  type: NodePort

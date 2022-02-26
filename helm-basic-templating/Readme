@@ -1,0 +1,10 @@
+File Structure of helm chart
+
+helm-basic-templating/
+├── Chart.yaml
+├── templates
+│   ├── deployment.yaml
+│   └── service.yaml
+└── values.yaml
+
+

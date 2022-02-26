@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: apache-deployment
+  name: apache-deployment
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: apache-deployment
+  template:
+    metadata:
+      labels:
+        app: apache-deployment
+    spec:
+      containers:
+      - image: httpd
+        name: httpd
