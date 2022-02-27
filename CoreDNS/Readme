@@ -1,0 +1,22 @@
+CoreDNS
+-------
+
+Kubernetes use coredns for configuration of DNS inside the Pod
+
+`kubectl get svc -n kube-system`
+the above command will return a service that has some ip,
+which is the ip of DNS server.
+
+
+Every pod launched inside the k8s cluster must have this DNS server ip inside path 
+/etc/resolv.conf 
+
+Every pod that launch inside the k8s cluster automatically becomes DNS client of the server running inside kube-system namespace
+
+
+---- 
+So what is the use DNS server ?
+=> DNS server forms the database for the service and map that service with the ip of that service.
+
+
+| Check the log file |
