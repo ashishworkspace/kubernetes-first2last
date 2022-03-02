@@ -1,0 +1,5 @@
+Docker is container management tool
+
+Containerd is container engine i.e. It is the server for docker CLI program 
+
+Runc is the oci-runtime that actually runs our container.
