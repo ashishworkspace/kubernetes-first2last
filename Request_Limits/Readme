@@ -1,0 +1,18 @@
+Request and Limits
+------------------
+
+
+Request is used by scheduler for scheduling the pod
+A pod can use resouces greater than what is mention inside request i.e. CPU limit as well as Memory Limtit
+ 
+A pod get terminated if pod use resources > what is mention inside limits
+It will than reschedule on same node or other nodes
+
+Using the concept of Limits inside the Pod it can be categories into 3 type of Qos(Quality of Service):
+  1. Guaranteed ( request and limits are equal)
+  2. Brustable  (request and limits not equal)
+  3. Best Effort (neither limit not request is mention)
+
+
+During Pod evition i.e. Pod get removed from node automatically due to high load on node or failure of nodes
+Pod with Qos class Best Effort will be removed first than Brustable and after that Guaranteed will be removed.

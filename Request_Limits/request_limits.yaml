@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pod-req-deployment
+  labels:
+    app: webserver
+spec:
+  selector:
+    matchLabels:
+      app: webserver
+  template:
+    metadata:
+      labels:
+        app: webserver
+    spec:
+      containers:
+        - image: nginx
+          name: webserver
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "100M"              
+            limits:
+              cpu: "50m"
+              memory: "100M"
