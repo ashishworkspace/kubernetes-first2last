@@ -43,11 +43,6 @@ Events:  <none>
 
 
 
-
-
-
-
-
 [ashish@localhost ~]$ k get deployment -n kube-system
 NAME      READY   UP-TO-DATE   AVAILABLE   AGE
 coredns   2/2     2            2           2d12h

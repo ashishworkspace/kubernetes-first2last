@@ -1,0 +1,8 @@
+Minikube Addons
+---------------
+
+To List addons in minikube 
+`minikube addons list`
+
+To Enable/Disable addons in minikube 
+`minikube addons { enable/disable } <addons name>`
